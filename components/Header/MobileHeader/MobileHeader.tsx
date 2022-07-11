@@ -55,47 +55,13 @@ const MobileHeader: React.FC<{}> = () => {
   }
 
   return (
-    <Sticky>
-      <HeaderWrapper className="mobile">
-        <Button
-          onClick={() => {
-            setIsOpen(true);
-            setMenu("main");
-          }}
-          kind="minimal"
-          size="compact"
-          overrides={{
-            BaseButton: {
-              style: ({ $theme }) => {
-                return {
-                  fontSize: "22px",
-                  width: "104px",
-                  justifyContent: "flex-start",
-                  ":hover": {
-                    backgroundColor: $theme.colors.primaryB,
-                  },
-                  ":focus": {
-                    backgroundColor: $theme.colors.primaryB,
-                  },
-                };
-              },
-            },
-          }}
-        >
-          <FiMenu />
-        </Button>
-
-        {pageName}
-
-        <Block
-          overrides={{
-            Block: { style: { display: "flex", alignItems: "center" } },
-          }}
-        >
+    <>
+      <Sticky>
+        <HeaderWrapper className="mobile">
           <Button
             onClick={() => {
               setIsOpen(true);
-              setMenu("top");
+              setMenu("main");
             }}
             kind="minimal"
             size="compact"
@@ -103,7 +69,9 @@ const MobileHeader: React.FC<{}> = () => {
               BaseButton: {
                 style: ({ $theme }) => {
                   return {
-                    fontSize: "24px",
+                    fontSize: "22px",
+                    width: "104px",
+                    justifyContent: "flex-start",
                     ":hover": {
                       backgroundColor: $theme.colors.primaryB,
                     },
@@ -115,52 +83,89 @@ const MobileHeader: React.FC<{}> = () => {
               },
             }}
           >
-            <FiMoreHorizontal />
+            <FiMenu />
           </Button>
-        </Block>
-      </HeaderWrapper>
 
-      <Drawer
-        isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-        anchor={placement}
-        overrides={{
-          Root: {
-            style: () => {
-              return { zIndex: 9999 };
-            },
-          },
+          {pageName}
 
-          Close: {
-            style: {
-              width: "30px",
-              height: "30px",
-              ":focus": {
-                borderTopColor: "transparent",
-                borderRightColor: "transparent",
-                borderBottomColor: "transparent",
-                borderLeftColor: "transparent",
+          <Block
+            overrides={{
+              Block: { style: { display: "flex", alignItems: "center" } },
+            }}
+          >
+            <Button
+              onClick={() => {
+                setIsOpen(true);
+                setMenu("top");
+              }}
+              kind="minimal"
+              size="compact"
+              overrides={{
+                BaseButton: {
+                  style: ({ $theme }) => {
+                    return {
+                      fontSize: "24px",
+                      ":hover": {
+                        backgroundColor: $theme.colors.primaryB,
+                      },
+                      ":focus": {
+                        backgroundColor: $theme.colors.primaryB,
+                      },
+                    };
+                  },
+                },
+              }}
+            >
+              <FiMoreHorizontal />
+            </Button>
+          </Block>
+        </HeaderWrapper>
+
+        <Drawer
+          isOpen={isOpen}
+          onClose={() => setIsOpen(false)}
+          anchor={placement}
+          overrides={{
+            Root: {
+              style: () => {
+                return { zIndex: 9999 };
               },
             },
-          },
-        }}
-      >
-        {menu === "main" && (
-          <MainMenu
-            className={`mobile-menu ${theme}`}
-            onClick={() => setIsOpen(false)}
-          />
-        )}
 
-        {menu === "top" && (
-          <TopMenuWrapper>
-            <TopMenu onClick={() => setIsOpen(false)} />
+            Close: {
+              style: {
+                width: "30px",
+                height: "30px",
+                ":focus": {
+                  borderTopColor: "transparent",
+                  borderRightColor: "transparent",
+                  borderBottomColor: "transparent",
+                  borderLeftColor: "transparent",
+                },
+              },
+            },
+          }}
+        >
+          {menu === "main" && (
+            <MainMenu
+              className={`mobile-menu ${theme}`}
+              onClick={() => setIsOpen(false)}
+            />
+          )}
 
-            <AvatarMenu showOnlyMenu={true} onClick={() => setIsOpen(false)} />
-          </TopMenuWrapper>
-        )}
-      </Drawer>
-    </Sticky>
+          {menu === "top" && (
+            <TopMenuWrapper>
+              <TopMenu onClick={() => setIsOpen(false)} />
+
+              <AvatarMenu
+                showOnlyMenu={true}
+                onClick={() => setIsOpen(false)}
+              />
+            </TopMenuWrapper>
+          )}
+        </Drawer>
+      </Sticky>
+    </>
   );
 };
 
