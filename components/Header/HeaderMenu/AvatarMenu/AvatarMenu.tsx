@@ -84,7 +84,13 @@ const AvatarMenu = ({
           showArrow
         >
           <Block overrides={{ Block: { style: { cursor: "pointer" } } }}>
-            <Avatar src={src} name={name ? name : "Jon Doe"} size="scale1000" />
+            <img
+              src={src}
+              style={{
+                borderRadius: "50%",
+                height: "25px",
+              }}
+            />
           </Block>
         </StatefulPopover>
       )}
